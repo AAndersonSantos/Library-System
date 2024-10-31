@@ -1,4 +1,32 @@
 <?php
+ob_start();
+
+require_once __DIR__ . '/Domain/Models/Pessoa.php';
+require_once __DIR__ . '/Domain/Models/Usuario.php';
+require_once __DIR__ . '/Domain/Repositories/UsuarioRepository.php';
+require_once __DIR__ . '/Domain/Services/BibliotecaService.php';
+require_once __DIR__ . '/Infrastructure/Database/Database.php';
+
+use Domain\Services\BibliotecaService;
+use Infrastructure\Database\Database;
+
+$bibliotecaService = new BibliotecaService();
+$database = new Database();
+
 header('Content-Type: application/json');
 
-echo json_encode(["message" => "Bem-vindo à API Sistema Biblioteca!"]);
+$method = $_SERVER['REQUEST_METHOD'];
+$requestUri = $_SERVER['REQUEST_URI'];
+
+if ($requestUri === '/') {
+    echo json_encode(["message" => "Bem-vindo a API da Biblioteca!"]);
+
+} elseif (preg_match('/\/usuarios(\/(\d+))?/', $requestUri)) {
+    require_once __DIR__ . '/routes/routesUsuarios.php';
+
+} else {
+    http_response_code(404);
+    echo json_encode(["error" => "Rota não encontrada."]);
+}
+
+ob_end_flush();
