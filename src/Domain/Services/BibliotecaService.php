@@ -1,14 +1,18 @@
 <?php
+
 namespace Domain\Services;
 
 use Infrastructure\Database\Database;
 use Domain\Repositories\LivroRepository;
 use Domain\Repositories\UsuarioRepository;
+use Domain\Repositories\EmprestimoRepository;
 use Domain\Models\Usuario;
+use Domain\Models\Emprestimo; 
 
 class BibliotecaService {
     private $livroRepository;
     private $usuarioRepository;
+    private $emprestimoRepository;
 
     public function __construct() {
         $database = new Database();
@@ -16,6 +20,13 @@ class BibliotecaService {
         
         $this->livroRepository = new LivroRepository($connection);
         $this->usuarioRepository = new UsuarioRepository($connection);
+        $this->emprestimoRepository = new EmprestimoRepository($connection);
+    }
+
+    //Emprestimo
+    public function registrarEmprestimo(int $livroId, int $usuarioId) {
+        $emprestimo = new Emprestimo($livroId, $usuarioId);
+        $this->emprestimoRepository->salvarEmprestimo($emprestimo);
     }
 
     //Livros

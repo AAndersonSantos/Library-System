@@ -1,11 +1,13 @@
 <?php
 ob_start();
 
+require_once __DIR__ . '/Domain/Models/Emprestimo.php';
 require_once __DIR__ . '/Domain/Models/Livro.php';
 require_once __DIR__ . '/Domain/Models/Pessoa.php';
 require_once __DIR__ . '/Domain/Models/Usuario.php';
 require_once __DIR__ . '/Domain/Repositories/LivroRepository.php';
 require_once __DIR__ . '/Domain/Repositories/UsuarioRepository.php';
+require_once __DIR__ . '/Domain/Repositories/EmprestimoRepository.php';
 require_once __DIR__ . '/Domain/Services/BibliotecaService.php';
 require_once __DIR__ . '/Infrastructure/Database/Database.php';
 
@@ -28,6 +30,9 @@ if ($requestUri === '/') {
 
 } elseif (preg_match('/\/usuarios(\/(\d+))?/', $requestUri)) {
     require_once __DIR__ . '/routes/routesUsuarios.php';
+
+} elseif (preg_match('/\/emprestimos(\/(\d+))?/', $requestUri)) {
+    require_once __DIR__ . '/routes/routesEmprestimos.php';
 
 } else {
     http_response_code(404);
