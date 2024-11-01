@@ -64,3 +64,31 @@ vendor/bin/phpunit tests
 ```
 
 The tests will be executed, and you will see the results in the terminal.
+
+## Endpoints
+
+You can access the following endpoints to test the routes using Postman or any API testing tool:
+
+Books:
+
+    GET: http://localhost:8000/index.php/livros
+
+    POST: http://localhost:8000/index.php/livros
+
+    PUT: http://localhost:8000/index.php/livros/{id}
+
+    DELETE: http://localhost:8000/index.php/livros/{id}
+
+Users:
+
+    GET: http://localhost:8000/index.php/usuarios
+
+    POST: http://localhost:8000/index.php/usuarios
+
+    PUT: http://localhost:8000/index.php/usuarios/{id}
+
+    DELETE: http://localhost:8000/index.php/usuarios/{id}
+
+Loans:
+
+    POST: http://localhost:8000/index.php/emprestimos
